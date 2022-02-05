@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+</div>
+
+<div class="row text-end">
+  <div class="col">
+    <button class="btn btn-primary" routerLink="/pagos/registrar">
+      <i class="fas fa-cash-register"></i>
+      Gestionar Pagos
+    </button>
+  </div>
+</div>
+
+<table *ngIf="!cargando && pagos.length > 0" class="table mt-5">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nombres</th>
+    <th scope="col">Codigo</th>
+    <th scope="col">descripción</th>
+    <th scope="col">precio de compra</th>
+    <th scope="col">cantidad</th>
+    <th scope="col">precio de venta</th>
+    <th scope="col">Valores</th>
+    <th scope="col">Fecha Crear</th>
+    <th scope="col">fecha Actualizar</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pago of pagos; let i=index">
+    <th scope="row">{{i+1}}</th>
+    <td>{{pago.name}}</td>
+    <td>{{pago.code}}</td>
+    <td>{{pago.description}}</td>
+    <td>{{pago.purchasePrice}}</td>
+    <td>{{pago.quantity}}</td>
+    <td>{{pago.salePrice}}</td>
+    <td>{{pago.stock}}</td>
+    <td>{{pago.dateCreate}}</td>
+    <td>{{pago.dateUpdate}}</td>
+    <td>
+      <button class="btn btn-warning m-2" [routerLink]="['/pagos/',pago._id]">
+        <i class="fas fa-pen"></i>
+      </button>
+      <button class="btn btn-danger" (click)="eliminar(pago,i)">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="cargando" class="alert alert-info text-center mt-3">
+<h5>Cargando</h5>
+  <p>
+    <i class="fas fa-spinner fa-spin fa-2x"></i>
+  </p>
+  <p>Por favor espere...</p>
+</div>
+
+<div *ngIf="!cargando && pagos.length===0" class="alert alert-warning text-center mt-3">
+  <h5>No hay registros</h5>
+  <p>
+    <i class="fas fa-exclamation fa-2x"></i>
+  </p>
+</div>
+
+
